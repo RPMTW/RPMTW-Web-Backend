@@ -3,7 +3,6 @@ const fetch = require("node-fetch");
 const cors = require("cors");
 const functions = require("./functions")
 
-
 express()
     .use(cors())
     .set("view engine", "ejs")
@@ -24,6 +23,7 @@ express()
     })
     .get("/rpmlauncher/api/microsof-auth", (req, res) => {
         functions.AuthorizationXBL(req.query.accessToken)
+            .done(data => res.json(data))
     })
     .get("/rpmtranslator/api/deepl-translator", async (req, res) => {
 
