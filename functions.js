@@ -21,7 +21,7 @@ let getCrowdinToken = (code, res) => {
     })
 }
 let getDiscordToken = (code, res) => {
-  console.log(sets.discord.REDIRECT_URI)
+  console.log(code)
   fetch(`${sets.discord.API}/oauth2/token`, {
     method: "POST",
     headers: {
@@ -33,7 +33,6 @@ let getDiscordToken = (code, res) => {
       "grant_type": "authorization_code",
       "redirect_uri": sets.discord.REDIRECT_URI,
       "code": code,
-      "scope": "identify%20connections%20email%20guilds"
     })
   }).then(d => console.log(d))
 }

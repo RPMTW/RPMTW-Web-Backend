@@ -34,11 +34,8 @@ let Second = {
         Oauth2: `https://discord.com/api/oauth2/authorize?response_type=code&client_id=${sets_main.discord.botId}&scope=identify%20guilds.join&redirect_uri=${sets_rear.discord.REDIRECT_URI}&prompt=consent`,
     }
 }
-let sets = {
-    ...Second,
-    ...sets_rear,
-    ...sets_main,
-}
+
+let sets = Object.assign({}, Second, sets_main, sets_rear)
 
 module.exports = {
     sets
