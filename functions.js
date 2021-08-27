@@ -15,15 +15,29 @@ let getCrowdinToken = (code, res) => {
       redirect_uri: sets.crowdin.redirect_uri,
       code: code,
     }),
-  })
-    .then((d) => d.json())
+  }).then((d) => d.json())
     .then((json) => {
       res.redirect(301, `${sets.web.translator}/callback.html?data=${JSON.stringify(json)}`);
     })
 }
 let getDiscordToken = (code, res) => {
-
+  fetch(`${sets.discord.API}/oauth2/token`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/x-www-form-urlencoded"
+    },
+    data: {
+      "client_id": sets.discord.botId,
+      "client_secret": sets.discord.client_secret,
+      "grant_type": "refresh_token",
+      "refresh_token": code
+    }
+  }).then(d => d.json())
+    .then(json => {
+      res.send(json)
+    })
 }
 module.exports = {
-  getCrowdinToken
+  getCrowdinToken,
+  getDiscordToken
 };

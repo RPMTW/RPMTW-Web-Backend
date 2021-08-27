@@ -3,7 +3,6 @@
         O: https://test.com
         X: https://test.com/
 */
-
 let sets_main = {
     web: {
         api: "https://rear-end.a102009102009.repl.co",
@@ -12,6 +11,7 @@ let sets_main = {
     },
     discord: {
         botId: "880821114014666753",
+        API: "https://discord.com/api/v8",
         client_secret: process.env.discord_client_secret,
     },
     crowdin: {
@@ -26,14 +26,20 @@ let sets_main = {
 }
 let sets_rear = {
     discord: {
-        Oauth2: `https://discord.com/api/oauth2/authorize?response_type=code&client_id=${sets_main.discord.botId}&scope=identify%20guilds.join&redirect_uri=${sets_main.web.api + "/discord/oauth/auth"}&prompt=consent`
+        REDIRECT_URI: sets_main.web.api + "/discord/oauth/auth",
+    }
+}
+let Second = {
+    discord: {
+        Oauth2: `https://discord.com/api/oauth2/authorize?response_type=code&client_id=${sets_main.discord.botId}&scope=identify%20guilds.join&redirect_uri=${sets_rear.discord.REDIRECT_URI}&prompt=consent`,
     }
 }
 let sets = {
+    ...Second,
+    ...sets_rear,
     ...sets_main,
-    ...sets_rear
 }
-console.log(sets.discord.Oauth2)
+
 module.exports = {
     sets
 }

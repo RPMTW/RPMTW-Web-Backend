@@ -1,7 +1,7 @@
 const express = require("express")
 const fetch = require("node-fetch");
 const cors = require("cors");
-const { getCrowdinToken } = require("./functions")
+const { getCrowdinToken, getDiscordToken } = require("./functions")
 const { AuthorizationXBL } = require("./MSAccountHandler")
 
 express()
@@ -17,8 +17,8 @@ express()
   })
   .get("/discord/oauth/auth", (req, res) => {
     /* 回傳token */
-    let params = req.query;
-    console.log(params);
+    let params = req.query.code;
+    params && getDiscordToken(params) || res.send(401)
   })
   .get("/curseForge/api/", (req, res) => {
     /* CurseForge API 代理 */
