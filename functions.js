@@ -21,6 +21,7 @@ let getCrowdinToken = (code, res) => {
     })
 }
 let getDiscordToken = (code, res) => {
+  console.log(code)
   fetch(`${sets.discord.API}/oauth2/token`, {
     method: "POST",
     headers: {
@@ -30,12 +31,15 @@ let getDiscordToken = (code, res) => {
       "client_id": sets.discord.botId,
       "client_secret": sets.discord.client_secret,
       "grant_type": "refresh_token",
-      "refresh_token": code
+      "redirect_uri": `${sets.discord.API}/oauth2/token`,
+      "code": code,
     }
-  }).then(d => d.json())
+  }).then(d => console.log(d))
     .then(json => {
-      res.send(json)
+      console.log(json)
+      res.json(json)
     })
+    .catch(error => res.json(error))
 }
 module.exports = {
   getCrowdinToken,
