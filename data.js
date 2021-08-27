@@ -13,7 +13,7 @@ let sets = {
     discord: {
         botId: "880821114014666753",
         client_secret: process.env.discord_client_secret,
-        Oauth2: `https://discord.com/api/oauth2/authorize?response_type=code&client_id=${main.discord.id}&scope=identify%20guilds.join&state=${process.env}&redirect_uri=${main.web}&prompt=consent`
+        Oauth2: `https://discord.com/api/oauth2/authorize?response_type=code&client_id=${sets.discord.botId}&scope=identify%20guilds.join&redirect_uri=${sets.web.api + "/discord/oauth/auth"}&prompt=consent`
     },
     crowdin: {
         /* crowdin */
@@ -25,7 +25,7 @@ let sets = {
         /* 其它API */
     }
 }
-
+console.log(sets.discord.Oauth2)
 module.exports = {
     sets
 }
