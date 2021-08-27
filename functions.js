@@ -27,7 +27,7 @@ let getDiscordToken = (code, res) => {
     headers: {
       "Content-Type": "application/x-www-form-urlencoded"
     },
-    data: {
+    body: {
       "client_id": sets.discord.botId,
       "client_secret": sets.discord.client_secret,
       "grant_type": "refresh_token",
