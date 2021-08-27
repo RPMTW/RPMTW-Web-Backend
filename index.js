@@ -15,6 +15,12 @@ express()
     let params = req.query
     getToken(params.code, res)
   })
+  .get("/discord/oauth/auth", (req, res) => {
+    /* 回傳token */
+    
+    let params = req.query
+    getToken(params.code, res)
+  })
   .get("/curseForge/api/", (req, res) => {
     /* CurseForge API 代理 */
     fetch(`https://addons-ecs.forgesvc.net/api/v2/${req.query.url}`)
