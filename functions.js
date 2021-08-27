@@ -23,7 +23,6 @@ let getToken = (code, res) => {
   })
     .then((d) => d.json())
     .then((json) => {
-      console.log(json)
       res.redirect(301, `${Token.web}/callback.html?data=${JSON.stringify(json)}`);
     })
 }
