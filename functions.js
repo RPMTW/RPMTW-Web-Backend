@@ -35,11 +35,6 @@ let getDiscordToken = (code, res) => {
       "code": code,
     }
   }).then(d => console.log(d))
-    .then(json => {
-      console.log(json)
-      res.json(json)
-    })
-    .catch(error => res.json(error))
 }
 module.exports = {
   getCrowdinToken,
