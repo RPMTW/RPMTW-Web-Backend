@@ -1,7 +1,7 @@
 const express = require("express")
 const fetch = require("node-fetch");
 const cors = require("cors");
-const { getToken } = require("./functions")
+const { getCrowdinToken } = require("./functions")
 const { AuthorizationXBL } = require("./MSAccountHandler")
 
 express()
@@ -13,13 +13,12 @@ express()
   .get("/crowdin/oauth/auth/web", (req, res) => {
     /* 回傳token */
     let params = req.query
-    getToken(params.code, res)
+    getCrowdinToken(params.code, res)
   })
   .get("/discord/oauth/auth", (req, res) => {
     /* 回傳token */
-    
-    let params = req.query
-    getToken(params.code, res)
+    let params = req.query;
+    console.log(params);
   })
   .get("/curseForge/api/", (req, res) => {
     /* CurseForge API 代理 */
@@ -31,7 +30,7 @@ express()
   .get("/crowdin/api/", (req, res) => {
     /* Crowdin API 代理 */
     fetch(`https://api.crowdin.com/api/v2/${req.query.url}`, {
-      headers: req.headers.authorization == null ? {} : {"Authorization" : req.headers.authorization}
+      headers: req.headers.authorization == null ? {} : { "Authorization": req.headers.authorization }
     })
       .then(d => d.json())
       .then(json => res.json(json))
