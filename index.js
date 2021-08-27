@@ -3,8 +3,12 @@ const fetch = require("node-fetch");
 const cors = require("cors");
 const { getCrowdinToken, getDiscordToken } = require("./functions")
 const { AuthorizationXBL } = require("./MSAccountHandler")
+const https = require("https")
+const app = express()
 
-express()
+const server = https.createServer(app);
+
+app
   .use(cors())
   .set("view engine", "ejs")
   .get("/", (req, res) => {
@@ -17,8 +21,9 @@ express()
   })
   .get("/discord/oauth/auth", (req, res) => {
     /* 回傳token */
+    console.log(req.query)
     let params = req.query.code;
-    params && getDiscordToken(params) || res.send(401)
+    params && getDiscordToken(params) || res.send("Emm")
   })
   .get("/curseForge/api/", (req, res) => {
     /* CurseForge API 代理 */
@@ -45,6 +50,7 @@ express()
   .get("/rpmtranslator/api/deepl-translator", async (req, res) => {
 
   })
-  .listen(process.env.PORT || 5000, () => {
-    console.log("is ready")
-  })
+
+server.listen(process.env.PORT || 5000, () => {
+  console.log("is ready")
+})
