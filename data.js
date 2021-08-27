@@ -26,7 +26,7 @@ let sets_main = {
 }
 let sets_rear = {
     discord: {
-        Oauth2: `https://discord.com/api/oauth2/authorize?response_type=code&client_id=${sets.discord.botId}&scope=identify%20guilds.join&redirect_uri=${sets.web.api + "/discord/oauth/auth"}&prompt=consent`
+        Oauth2: `https://discord.com/api/oauth2/authorize?response_type=code&client_id=${sets_main.discord.botId}&scope=identify%20guilds.join&redirect_uri=${sets_main.web.api + "/discord/oauth/auth"}&prompt=consent`
     }
 }
 let sets = {
