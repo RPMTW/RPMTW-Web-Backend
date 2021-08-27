@@ -31,7 +31,7 @@ let getDiscordToken = (code, res) => {
       "client_id": sets.discord.botId,
       "client_secret": sets.discord.client_secret,
       "grant_type": "refresh_token",
-      "redirect_uri": `${sets.discord.API}/oauth2/token`,
+      "redirect_uri": sets.discord.REDIRECT_URI,
       "code": code,
     }
   }).then(d => console.log(d))
