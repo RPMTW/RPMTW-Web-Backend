@@ -11,7 +11,7 @@ let sets_main = {
     },
     discord: {
         botId: "880821114014666753",
-        API: "https://discord.com/api/v8",
+        API: "https://discord.com/api",
         client_secret: process.env.discord_client_secret,
     },
     crowdin: {
