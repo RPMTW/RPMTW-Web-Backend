@@ -21,19 +21,20 @@ let getCrowdinToken = (code, res) => {
     })
 }
 let getDiscordToken = (code, res) => {
-  console.log(code)
+  console.log(sets.discord.REDIRECT_URI)
   fetch(`${sets.discord.API}/oauth2/token`, {
     method: "POST",
     headers: {
       "Content-Type": "application/x-www-form-urlencoded"
     },
-    body: {
+    body: JSON.stringify({
       "client_id": sets.discord.botId,
       "client_secret": sets.discord.client_secret,
       "grant_type": "authorization_code",
       "redirect_uri": sets.discord.REDIRECT_URI,
       "code": code,
-    }
+      "scope": "identify%20connections%20email%20guilds"
+    })
   }).then(d => console.log(d))
 }
 module.exports = {
