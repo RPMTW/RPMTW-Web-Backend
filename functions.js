@@ -30,7 +30,7 @@ let getDiscordToken = (code, res) => {
     body: {
       "client_id": sets.discord.botId,
       "client_secret": sets.discord.client_secret,
-      "grant_type": "refresh_token",
+      "grant_type": "authorization_code",
       "redirect_uri": sets.discord.REDIRECT_URI,
       "code": code,
     }
