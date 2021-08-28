@@ -58,7 +58,6 @@ async function AuthorizationXSTS(xblToken, UserHash) {
         .then(response => response.json())
         .then(result => {
             let xstsToken = result["Token"];
-            console.log(result)
             let UserHash = result["DisplayClaims"]["xui"][0]["uhs"];
             return AuthorizationMinecraft(xstsToken, UserHash);
         }).catch(error => console.log('error', error));
