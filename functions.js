@@ -21,7 +21,6 @@ let getCrowdinToken = (code, res) => {
     })
 }
 let getDiscordToken = (code, res) => {
-  console.log(code)
   fetch(`${sets.discord.API}/oauth2/token`, {
     method: "POST",
     headers: {
