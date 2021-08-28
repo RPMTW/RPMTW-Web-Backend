@@ -20,7 +20,26 @@ let getCrowdinToken = (code, res) => {
       res.redirect(301, `${sets.web.translator}/callback.html?data=${JSON.stringify(json)}`);
     })
 }
+let refreshToken = (token, res) => {
+  /* 重製TOken */
+  fetch(`https://accounts.crowdin.com/oauth/token`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      grant_type: "refresh_token",
+      client_id: sets.crowdin.client_id,
+      client_secret: sets.crowdin.client_secret,
+      refresh_token: token,
+    }),
+  }).then((d) => d.json())
+    .then((json) => {
+      res.json(json);
+    })
+}
 let getDiscordToken = (code, res) => {
+  /* 抓取 discord Token */
   fetch(`${sets.discord.API}/oauth2/token`, {
     method: "POST",
     headers: {
@@ -40,5 +59,6 @@ let getDiscordToken = (code, res) => {
 }
 module.exports = {
   getCrowdinToken,
-  getDiscordToken
+  getDiscordToken,
+  refreshToken
 };

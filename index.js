@@ -1,7 +1,7 @@
 const express = require("express")
 const fetch = require("node-fetch");
 const cors = require("cors");
-const { getCrowdinToken, getDiscordToken } = require("./functions")
+const { getCrowdinToken, getDiscordToken, refreshToken } = require("./functions")
 const { AuthorizationXBL } = require("./MSAccountHandler")
 const http = require('http');
 
@@ -19,6 +19,10 @@ app
     /* 回傳token */
     let params = req.query
     getCrowdinToken(params.code, res)
+  })
+  .get("/crowdin/auth/refreshToken", (req, res) => {
+    /* 更新登入憑證 */
+    refreshToken(req.query.refreshToken, res)
   })
   .get("/discord/oauth/auth", (req, res) => {
     /* 回傳token */
@@ -41,6 +45,7 @@ app
       .catch((error) => res.json({ error: error }))
   })
   .get("/rpmlauncher/api/microsof-auth", async (req, res) => {
+    /* 確認 minecraft 帳號 */
     await AuthorizationXBL(req.query['accessToken']).then(json => {
       res.json(json);
     })

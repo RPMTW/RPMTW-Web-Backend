@@ -4,11 +4,14 @@
         X: https://test.com/
 */
 let web = {
+    /* 網頁/官方API */
     api: "https://rear-end.a102009102009.repl.co",
+    rpmtwchat: "https://api.rpmtwchat.ga/",
     main: "https://www.rpmtw.ga",
     translator: "https://translator.rpmtw.ga"
 }
 let discord = {
+    /* discord 相關 */
     botId: "880821114014666753",
     API: "https://discord.com/api",
     client_secret: process.env.discord_client_secret,
