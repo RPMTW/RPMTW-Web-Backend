@@ -22,7 +22,7 @@ app
   })
   .get("/discord/oauth/auth", (req, res) => {
     /* 回傳token */
-    getDiscordToken(req.query.code)
+    getDiscordToken(req.query.code, res)
   })
   .get("/curseForge/api/", (req, res) => {
     /* CurseForge API 代理 */

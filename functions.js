@@ -27,14 +27,17 @@ let getDiscordToken = (code, res) => {
     headers: {
       "Content-Type": "application/x-www-form-urlencoded"
     },
-    body: JSON.stringify({
-      "client_id": sets.discord.botId,
-      "client_secret": sets.discord.client_secret,
-      "grant_type": "authorization_code",
-      "redirect_uri": sets.discord.REDIRECT_URI,
-      "code": code,
+    body: new URLSearchParams({
+      client_id: sets.discord.botId,
+      client_secret: sets.discord.client_secret,
+      grant_type: "authorization_code",
+      scope: "identify",
+      redirect_uri: sets.discord.REDIRECT_URI,
+      code: code,
     })
-  }).then(d => console.log(d))
+  }).then(d => d.json()).then(json => {
+    res.json(json)
+  })
 }
 module.exports = {
   getCrowdinToken,
