@@ -45,9 +45,11 @@ app
       res.json(json);
     })
   })
-
   .get("/rpmtranslator/api/deepl-translator", async (req, res) => {
 
+  })
+  .get("/test/", (req, res) => {
+    /* 此為測試 */
   })
 
 server.listen(process.env.PORT || 5000, () => {

@@ -6,7 +6,7 @@
 let web = {
     api: "https://rear-end.a102009102009.repl.co",
     main: "https://www.rpmtw.ga",
-    translator: "https://translator.rpmtw.ga/index.html"
+    translator: "https://translator.rpmtw.ga"
 }
 let discord = {
     botId: "880821114014666753",
