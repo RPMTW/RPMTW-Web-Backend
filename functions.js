@@ -21,7 +21,7 @@ let getCrowdinToken = (code, res) => {
     })
 }
 let refreshToken = (token, res) => {
-  /* 重製TOken */
+  /* 更新登入憑證 */
   fetch(`https://accounts.crowdin.com/oauth/token`, {
     method: "POST",
     headers: {
