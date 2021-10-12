@@ -31,10 +31,8 @@ discord.Oauth2 = `https://discord.com/api/oauth2/authorize?response_type=code&cl
 
 
 module.exports = {
-    sets: {
-        web: web,
-        discord: discord,
-        crowdin: crowdin,
-        API: API,
-    }
+    web: web,
+    discord: discord,
+    crowdin: crowdin,
+    API: API,
 }

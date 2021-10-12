@@ -3,8 +3,7 @@ const fetch = require('node-fetch');
 async function AuthorizationXBL(accessToken) {
     //Authenticate with XBL
     var headers = new fetch.Headers();
-    headers.append("Content-Type", "application/json", 'Accept', 'application/json'
-    );
+    headers.append("Content-Type", "application/json", 'Accept', 'application/json');
 
     var raw = JSON.stringify({
         "Properties": {
@@ -35,8 +34,7 @@ async function AuthorizationXBL(accessToken) {
 async function AuthorizationXSTS(xblToken, UserHash) {
     //Authenticate with XSTS
     var headers = new fetch.Headers();
-    headers.append("Content-Type", "application/json", 'Accept', 'application/json'
-    );
+    headers.append("Content-Type", "application/json", 'Accept', 'application/json');
 
     var raw = JSON.stringify({
         "Properties": {
@@ -66,8 +64,7 @@ async function AuthorizationXSTS(xblToken, UserHash) {
 async function AuthorizationMinecraft(xstsToken, UserHash) {
     //Authenticate with Minecraft
     var headers = new fetch.Headers();
-    headers.append("Content-Type", "application/json", 'Accept', 'application/json'
-    );
+    headers.append("Content-Type", "application/json", 'Accept', 'application/json');
 
     var raw = JSON.stringify({
         "identityToken": `XBL3.0 x=${UserHash};${xstsToken}`
@@ -110,13 +107,11 @@ async function CheckingGameOwnership(MCAccessToken) {
                         name: ProfileJson.name,
                         id: ProfileJson.id
                     }
-                    return [
-                        {
-                            "accessToken": MCAccessToken,
-                            "selectedProfile": profile,
-                            "availableProfile": [profile]
-                        }
-                    ];
+                    return [{
+                        "accessToken": MCAccessToken,
+                        "selectedProfile": profile,
+                        "availableProfile": [profile]
+                    }];
                 } else {
                     return [];
                 }
