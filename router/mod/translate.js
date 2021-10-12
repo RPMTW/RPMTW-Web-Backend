@@ -30,7 +30,7 @@ router
                 "source": source, // 原文
                 "translate": data.data[0][0][0] // 譯文
             }))
-            .catch(error => res.status(error?.response?.status || 500).json(error))
+            .catch(error => res.status(error.response.status || 500).json(error))
     })
 
 module.exports = router;

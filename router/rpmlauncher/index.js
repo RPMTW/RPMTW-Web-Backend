@@ -13,7 +13,7 @@ router
         if (!req.query.accessToken) return res.status(400).json(BadRequestError())
         await AuthorizationXBL(req.query.accessToken)
             .then(json => res.json(json))
-            .catch(error => res.status(error?.response?.status || 500).json(error))
+            .catch(error => res.status(error.response.status || 500).json(error))
     })
 
 

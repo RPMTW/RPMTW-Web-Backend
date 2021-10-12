@@ -1,9 +1,6 @@
 const express = require("express");
 const cors = require("cors");
 const router = require("./router");
-// import {
-//     AuthorizationXBL
-// } from "./MSAccountHandler";
 const {
     Server
 } = require('http');

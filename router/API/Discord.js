@@ -18,7 +18,7 @@ router
         if (!req.query.code) return res.status(400).json(BadRequestError())
         await getDiscordToken(req.query.code)
             .then(data => res.json(data.data))
-            .catch(error => res.status(error?.response?.status || 500).json(error))
+            .catch(error => res.status(error.response.status || 500).json(error))
     })
 
 module.exports = router;
