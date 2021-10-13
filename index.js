@@ -4,6 +4,10 @@ const router = require("./router");
 const {
     Server
 } = require('http');
+const {
+    discord
+} = require("./data")
+
 
 const app = express();
 
@@ -18,3 +22,5 @@ app
 server.listen(process.env.PORT || 5000, () => {
     console.log("is ready")
 })
+
+console.log(discord.Oauth2)

@@ -29,7 +29,6 @@ let API = {
 discord.REDIRECT_URI = web.api + "/discord/oauth/auth"
 discord.Oauth2 = `https://discord.com/api/oauth2/authorize?response_type=code&client_id=${discord.botId}&scope=identify%20guilds.join&redirect_uri=${discord.REDIRECT_URI}&prompt=consent`
 
-
 module.exports = {
     web: web,
     discord: discord,

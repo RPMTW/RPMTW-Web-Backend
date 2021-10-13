@@ -4,7 +4,7 @@ const axios = require("axios");
 const sets = require("../../data");
 
 /** get Oauth2 Token */
-const getDiscordToken = async (code, res) =>
+const getDiscordToken = async (code) =>
     /* 抓取 discord Token */
     await axios({
         url: `${sets.discord.API}/oauth2/token`,
