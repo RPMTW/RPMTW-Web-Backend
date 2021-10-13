@@ -11,7 +11,7 @@ const {
 
 
 router
-    .get("/api", (req, res) => {
+    .get("/api", async (req, res) => {
 
         if (!req.query.url) return res.status(400).json(BadRequestError())
         await proxy(req.query.url)
