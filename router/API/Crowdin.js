@@ -18,7 +18,10 @@ router
         if (!(url && req.headers.authorization)) return res.status(400).json(BadRequestError())
         proxy(url, req.headers)
             .then(data => res.json(data))
-            .catch(error => res.status(error.response.status || 500).json(error))
+            .catch(error => res.status(error.response.status || 500).json({
+                message: error.message,
+                name: error.name
+            }))
     })
 
     /* ------ Oauth2 ------ */
@@ -27,14 +30,20 @@ router
         if (!req.query.code) return res.status(400).json(BadRequestError())
         getCrowdinToken(req.query.code)
             .then(data => res.json(data))
-            .catch(error => res.status(error.response.status || 500).json(error))
+            .catch(error => res.status(error.response.status || 500).json({
+                message: error.message,
+                name: error.name
+            }))
     })
     .get("/auth/refreshToken", (req, res) => {
         /** 更新登入憑證 */
         if (!req.query.refreshToken) return res.status(400).json(BadRequestError())
         refreshToken(req.query.refreshToken)
             .then(data => res.json(data))
-            .catch(error => res.status(error.response.status || 500).json(error))
+            .catch(error => res.status(error.response.status || 500).json({
+                message: error.message,
+                name: error.name
+            }))
     })
 
 module.exports = router
