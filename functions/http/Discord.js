@@ -2,6 +2,9 @@
 
 const axios = require("axios");
 const sets = require("../../data");
+const {
+    randomIP,
+} = require("./main")
 
 /** get Oauth2 Token */
 const getDiscordToken = async (code) =>
@@ -23,7 +26,7 @@ const getDiscordToken = async (code) =>
         }
     })
     .then(d => d.data)
-    .catch(error => error)
+    .catch(error => console.error(error))
 
 /** get User info */
 const getDiscordUser = async (code) =>
