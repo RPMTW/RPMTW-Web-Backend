@@ -19,7 +19,7 @@ router
         // Google API 最大字數限制為 5000
         if (source.length > 5000) return res.status(400).json(BadRequestError("文字數量超出"));
 
-        return axios({
+        axios({
                 url: `https://translate.googleapis.com/translate_a/single?client=gtx&sl=en_us&tl=zh_Hant&dt=t&q=${source}`,
                 method: "GET",
                 headers: {

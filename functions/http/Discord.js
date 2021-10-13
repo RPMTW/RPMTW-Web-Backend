@@ -8,22 +8,21 @@ const {
 const fetch = require("node-fetch")
 
 /** get Oauth2 Token */
-async function getDiscordToken(code) {
-    return await fetch(`${sets.discord.API}/oauth2/token`, {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/x-www-form-urlencoded"
-        },
-        body: new URLSearchParams({
-            client_id: sets.discord.botId,
-            client_secret: sets.discord.client_secret,
-            grant_type: "authorization_code",
-            scope: "identify",
-            redirect_uri: sets.discord.REDIRECT_URI,
-            code: code,
-        })
+const getDiscordToken = async (code) => await fetch(`${sets.discord.API}/oauth2/token`, {
+    method: "POST",
+    headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+        "x-forwarded-for": randomIP(),
+    },
+    body: new URLSearchParams({
+        client_id: sets.discord.botId,
+        client_secret: sets.discord.client_secret,
+        grant_type: "authorization_code",
+        scope: "identify",
+        redirect_uri: sets.discord.REDIRECT_URI,
+        code: code,
     })
-}
+})
 
 module.exports = {
     getDiscordToken,
