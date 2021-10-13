@@ -2,6 +2,8 @@
 /** Crowdin API */
 
 const router = require("express").Router()
+const sets = require("../../data");
+
 const {
     proxy,
     refreshToken,
@@ -30,8 +32,9 @@ router
         /** 回傳token */
         if (!req.query.code) return res.status(400).json(BadRequestError())
         getCrowdinToken(req.query.code)
-            .then(data => res.json(data))
-            .catch(error => res.status(error.response.status || 500).json({
+            .then(data => data.data)
+            .then(json => res.redirect(301, `${sets.web.translator}/callback.html?data=${JSON.stringify(json)}`))
+            .catch(error => res.status(error.response && error.response.status || 500).json({
                 message: error.message,
                 name: error.name
             }))
@@ -41,7 +44,7 @@ router
         if (!req.query.refreshToken) return res.status(400).json(BadRequestError())
         refreshToken(req.query.refreshToken)
             .then(data => res.json(data))
-            .catch(error => res.status(error.response.status || 500).json({
+            .catch(error => res.status(error.response && error.response.status || 500).json({
                 message: error.message,
                 name: error.name
             }))

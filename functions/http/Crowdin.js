@@ -1,6 +1,11 @@
 /* Crowdin 相關請求 */
 
 const axios = require("axios");
+const sets = require("../../data");
+
+const {
+    randomIP,
+} = require("./main")
 
 const proxy = async (url, headers) => await axios({
     url: `https://api.crowdin.com/api/v2/${url}`,
@@ -15,7 +20,7 @@ const proxy = async (url, headers) => await axios({
 /** get Crowdin Token */
 const getCrowdinToken = async (code) => await axios({
     url: "https://accounts.crowdin.com/oauth/token",
-    method: "PSOT",
+    method: "POST",
     headers: {
         "Content-Type": "application/json",
         "x-forwarded-for": randomIP(),
