@@ -5,11 +5,11 @@ const sets = require("../../data");
 const {
     randomIP,
 } = require("./main")
-const fetch = require("node-fetch")
 
 /** get Oauth2 Token */
 const getDiscordToken = (code) =>
-    fetch(`${sets.discord.API}/oauth2/token`, {
+    axios({
+        url: `${sets.discord.API}/oauth2/token`,
         method: "POST",
         headers: {
             "Content-Type": "application/x-www-form-urlencoded"
