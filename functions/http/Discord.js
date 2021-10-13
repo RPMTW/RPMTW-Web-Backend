@@ -5,6 +5,7 @@ const sets = require("../../data");
 const {
     randomIP,
 } = require("./main")
+const fetch = require("node-fetch")
 
 /** get Oauth2 Token */
 const getDiscordToken = (code) =>
