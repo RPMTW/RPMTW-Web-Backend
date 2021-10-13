@@ -16,9 +16,8 @@ router
     .get("/oauth/auth", (req, res) => {
         /* 回傳 discord token */
         if (!req.query.code) return res.status(400).json(BadRequestError())
-        console.log(req.query.code)
         getDiscordToken(req.query.code)
-            .then(data => res.json(data.data))
+            .then(data => res.json(data.json()))
             .catch(error => {
                 console.error(error)
                 res.status((error.response && error.response.status) || 500).json({
