@@ -2,7 +2,7 @@
 
 const axios = require("axios");
 
-function proxy(url, headers) {
+async function proxy(url, headers) {
     return await axios({
         url: `https://api.crowdin.com/api/v2/${url}`,
         method: "GET",
