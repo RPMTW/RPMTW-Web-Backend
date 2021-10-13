@@ -2,8 +2,8 @@
 
 const axios = require("axios");
 
-const proxy = (url, headers) =>
-    axios({
+function proxy(url, headers) {
+    return await axios({
         url: `https://api.crowdin.com/api/v2/${url}`,
         method: "GET",
         headers: {
@@ -12,12 +12,10 @@ const proxy = (url, headers) =>
             "x-forwarded-for": randomIP(),
         }
     })
-    .then(d => d.data)
-    .catch(error => error)
-
+}
 /** get Crowdin Token */
-const getCrowdinToken = (code) =>
-    axios({
+async function getCrowdinToken(code) {
+    return await axios({
         url: "https://accounts.crowdin.com/oauth/token",
         method: "PSOT",
         headers: {
@@ -32,10 +30,11 @@ const getCrowdinToken = (code) =>
             code: code,
         },
     })
+}
 
 /** 更新登入憑證 */
-const refreshToken = (token) =>
-    axios({
+async function refreshToken(token) {
+    return await axios({
         url: "https://accounts.crowdin.com/oauth/token",
         method: "POST",
         headers: {
@@ -49,6 +48,7 @@ const refreshToken = (token) =>
             refresh_token: token,
         },
     })
+}
 
 module.exports = {
     proxy,

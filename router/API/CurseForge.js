@@ -14,7 +14,7 @@ router
     .get("/api", (req, res) => {
 
         if (!req.query.url) return res.status(400).json(BadRequestError())
-        proxy(req.query.url)
+        await proxy(req.query.url)
             .then(data => res.json(data))
             .catch(error => res.status(error.response.status || 500).json(error))
     })

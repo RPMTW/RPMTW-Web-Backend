@@ -8,7 +8,7 @@ const {
 const fetch = require("node-fetch")
 
 /** get Oauth2 Token */
-const getDiscordToken = async (code) =>
+async function getDiscordToken(code) {
     await fetch(`${sets.discord.API}/oauth2/token`, {
         method: "POST",
         headers: {
@@ -23,19 +23,8 @@ const getDiscordToken = async (code) =>
             code: code,
         })
     })
-
-/** get User info */
-const getDiscordUser = (code) =>
-    axios({
-        url: "",
-        method: "GET",
-        headers: {
-            "Content-Type": "application/json",
-            "x-forwarded-for": randomIP(),
-        }
-    })
+}
 
 module.exports = {
     getDiscordToken,
-    getDiscordUser,
 }
