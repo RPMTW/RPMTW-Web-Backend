@@ -1,3 +1,5 @@
+const fetch = require("node-fetch");
+
 async function AuthorizationXBL(accessToken) {
     //Authenticate with XBL
     var headers = new fetch.Headers();

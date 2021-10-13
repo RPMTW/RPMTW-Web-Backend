@@ -5,11 +5,11 @@ const sets = require("../../data");
 const {
     randomIP,
 } = require("./main")
+const fetch = require("node-fetch")
 
 /** get Oauth2 Token */
-const getDiscordToken = (code) =>
-    axios({
-        url: `${sets.discord.API}/oauth2/token`,
+const getDiscordToken = async (code) =>
+    await fetch(`${sets.discord.API}/oauth2/token`, {
         method: "POST",
         headers: {
             "Content-Type": "application/x-www-form-urlencoded"
@@ -22,8 +22,6 @@ const getDiscordToken = (code) =>
             redirect_uri: sets.discord.REDIRECT_URI,
             code: code,
         })
-    }).then(d => d.json()).then(json => {
-        res.json(json)
     })
 
 /** get User info */
