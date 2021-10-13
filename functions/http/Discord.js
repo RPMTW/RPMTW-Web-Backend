@@ -9,7 +9,7 @@ const fetch = require("node-fetch")
 
 /** get Oauth2 Token */
 async function getDiscordToken(code) {
-    await fetch(`${sets.discord.API}/oauth2/token`, {
+    return await fetch(`${sets.discord.API}/oauth2/token`, {
         method: "POST",
         headers: {
             "Content-Type": "application/x-www-form-urlencoded"
