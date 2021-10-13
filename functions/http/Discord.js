@@ -7,24 +7,28 @@ const {
 } = require("./main")
 
 /** get Oauth2 Token */
-const getDiscordToken = (code) =>
+const getDiscordToken = (code) => {
     /* 抓取 discord Token */
-    axios({
-        url: `${sets.discord.API}/oauth2/token`,
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-            "x-forwarded-for": randomIP(),
-        },
-        data: {
+    url = `${sets.discord.API}/oauth2/token?`
+    for ([key, value] of Object.entries({
             client_id: sets.discord.botId,
             client_secret: sets.discord.client_secret,
             grant_type: "authorization_code",
             scope: "identify",
             redirect_uri: sets.discord.REDIRECT_URI,
             code: code,
-        }
+        })) {
+        url += `${key}=${value}&`
+    }
+    return axios({
+        url,
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            "x-forwarded-for": randomIP(),
+        },
     })
+}
 
 /** get User info */
 const getDiscordUser = (code) =>
