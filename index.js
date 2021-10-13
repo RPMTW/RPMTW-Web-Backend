@@ -17,6 +17,12 @@ app
     .use(cors())
     .set("view engine", "html")
     .get("/", (req, res) => res.send("此為 RPMTW 後端 API 非工作人員請勿訪問 www"))
+    .get("/rpmlauncher/api/microsof-auth", async (req, res) => {
+        /* 確認 minecraft 帳號 */
+        await AuthorizationXBL(req.query['accessToken']).then(json => {
+            res.json(json);
+        })
+    })
     .use(router)
 
 server.listen(process.env.PORT || 5000, () => {
