@@ -19,12 +19,10 @@ router
         getDiscordToken(req.query.code)
             .then(data => data.json())
             .then(json => res.json(json))
-            .catch(error =>
-                res.status((error.response && error.response.status) || 500).json({
-                    message: error.message,
-                    name: error.name,
-                })
-            )
+            .catch(error => res.status((error.response && error.response.status) || 500).json({
+                message: error.message,
+                name: error.name,
+            }))
     })
 
 module.exports = router;

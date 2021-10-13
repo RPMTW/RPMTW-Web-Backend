@@ -15,8 +15,12 @@ router
 
         if (!req.query.url) return res.status(400).json(BadRequestError())
         proxy(req.query.url)
+            .then(data => data.data)
             .then(data => res.json(data))
-            .catch(error => res.status(error.response.status || 500).json(error))
+            .catch(error => res.status((error.response && error.response.status) || 500).json({
+                message: error.message,
+                name: error.name,
+            }))
     })
 
 

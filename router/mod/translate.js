@@ -26,9 +26,10 @@ router
                     "x-forwarded-for": randomIP()
                 }
             })
+            .then(data => data.data)
             .then(data => res.json({
                 "source": source, // 原文
-                "translate": data.data[0][0][0] // 譯文
+                "translate": data[0][0][0] // 譯文
             }))
             .catch(error => res.status(error.response.status || 500).json(error))
     })
