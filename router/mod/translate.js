@@ -23,15 +23,15 @@ router
                 url: `https://translate.googleapis.com/translate_a/single?client=gtx&sl=en_us&tl=zh_Hant&dt=t&q=${source}`,
                 method: "GET",
                 headers: {
-                    "x-forwarded-for": randomIP()
+                    "Content-Type": "application/json",
+                    "x-forwarded-for": randomIP(),
                 }
             })
-            .then(data => data.data)
             .then(data => res.json({
                 "source": source, // 原文
-                "translate": data[0][0][0] // 譯文
+                "translate": data.data[0][0][0] // 譯文
             }))
-            .catch(error => res.status(error.response.status || 500).json(error))
+            .catch(error => res.status((error.response && error.response.status) || 500).json(error))
     })
 
 module.exports = router;

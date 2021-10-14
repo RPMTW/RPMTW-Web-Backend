@@ -18,19 +18,19 @@ const proxy = async (url, headers) => await axios({
 })
 
 /** get Crowdin Token */
-const getCrowdinToken = async (code) => await axios({
+const getCrowdinToken = async (code, redirect_uri=null) => await axios({
     url: "https://accounts.crowdin.com/oauth/token",
     method: "POST",
     headers: {
         "Content-Type": "application/json",
         "x-forwarded-for": randomIP(),
     },
-    data: {
-        grant_type: "authorization_code",
-        client_id: sets.crowdin.client_id,
-        client_secret: sets.crowdin.client_secret,
-        redirect_uri: sets.crowdin.redirect_uri,
-        code: code,
+    data: {  
+      grant_type: "authorization_code",
+      code: code,
+      client_id: sets.crowdin.client_id,
+      client_secret: sets.crowdin.client_secret,
+      redirect_uri: redirect_uri || sets.crowdin.redirect_uri,
     },
 })
 
