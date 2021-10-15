@@ -1,28 +1,42 @@
 require("dotenv").config()
 const express = require("express");
-const cors = require("cors");
-const router = require("./router");
+const path = require("path");
+
 const {
     Server
-} = require('http');
+} = require("http");
 const {
-    discord
-} = require("./data")
+    createServer: createViteServer
+} = require("vite")
+
 const client = require("./client")
+const router = require("./router");
 
 const app = express();
-
 const server = Server(app);
 
-app
-    .use(cors())
-    .set("view engine", "html")
-    .get("/", (req, res) => res.send("此為 RPMTW 後端 API 非工作人員請勿訪問 www"))
-    .use(router)
+async function createServer() {
+    const vite = await createViteServer({
+        server: {
+            middlewareMode: "ssr"
+        }
+    });
 
-server.listen(process.env.PORT || 5000, () => {
-    console.log("is ready")
-    client.login(process.env.discord_bot_token);
-})
+    app
+        /* --------------- */
+        .use(require("cors")())
+        .set("views", path.join(__dirname, "views"))
+        .set("view engine", "html")
+        .use(express.static(path.join(__dirname, "public")))
+        /* --------------- */
+        .get("/", (req, res) => res.send("此為 RPMTW 後端 API 非工作人員請勿訪問 www"))
+        .use(router)
+        .use(vite.middlewares)
 
-console.log(discord.Oauth2)
+    server.listen(process.env.PORT || 5000, () => {
+        console.log("is ready")
+        client.login(process.env.discord_bot_token);
+    });
+};
+
+createServer();

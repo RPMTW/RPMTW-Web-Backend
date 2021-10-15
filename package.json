@@ -5,7 +5,9 @@
   "main": "index.js",
   "type": "commonjs",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "vite",
+    "build": "vue-tsc --noEmit && vite build",
+    "serve": "vite preview"
   },
   "keywords": [],
   "author": "",
@@ -17,10 +19,16 @@
     "dotenv": "^10.0.0",
     "express": "^4.17.1",
     "node-fetch": "^2.6.0",
-    "querystring": "^0.2.1"
+    "querystring": "^0.2.1",
+    "vue": "^3.2.16",
+    "vue-router": "^4.0.12"
   },
   "devDependencies": {
-    "node": "^16.6.1"
+    "@vitejs/plugin-vue": "^1.9.3",
+    "node": "^16.6.1",
+    "typescript": "^4.4.3",
+    "vite": "^2.6.4",
+    "vue-tsc": "^0.3.0"
   },
   "repository": {
     "type": "git",
