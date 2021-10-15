@@ -31,7 +31,7 @@ router
     .get("/oauth/auth/web", (req, res) => {
         /** 導出用戶 token 至翻譯網頁 */
         if (!req.query.code) return res.status(400).json(BadRequestError())
-        getCrowdinToken(req.query.code)
+        getCrowdinToken(req.query.code, "https://rear-end.a102009102009.repl.co/crowdin/oauth/auth/web")
             .then(data => data.data)
             .then(json => res.redirect(301, `${sets.web.translator}/callback.html?data=${JSON.stringify(json)}`))
             .catch(error => res.status(error.response && error.response.status || 500).json({
@@ -42,7 +42,7 @@ router
     .get("/oauth/auth", (req, res) => {
         /** GET token */
         if (!req.query.code) return res.status(400).json(BadRequestError())
-        getCrowdinToken(req.query.code, "https://rear-end.a102009102009.repl.co/crowdin/oauth/auth")
+        getCrowdinToken(req.query.code)
             .then(data => data.data)
             .then(json => res.json(json))
             .catch(error => res.status(error.response && error.response.status || 500).json({

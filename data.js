@@ -12,6 +12,7 @@ let web = {
 }
 let discord = {
     /* discord 相關 */
+    v: 9,
     botId: "880821114014666753",
     API: "https://discord.com/api",
     client_secret: process.env.discord_client_secret,
@@ -20,7 +21,7 @@ let crowdin = {
     /* crowdin */
     client_id: "8HpxK2jINouRXTrVq6gf",
     client_secret: process.env.crowdin_client_secret,
-    redirect_uri: "https://rear-end.a102009102009.repl.co/crowdin/oauth/auth/web",
+    redirect_uri: "https://rear-end.a102009102009.repl.co/crowdin/oauth/auth",
 }
 let API = {
     /* 其它API */
