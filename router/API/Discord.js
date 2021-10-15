@@ -69,7 +69,10 @@ router
             return res.status(401).json(BadRequestError(`你不在我們的 ${in_guild_error.join("、")} 中`, 401));
         /* --------------- */
         let guild = client.guilds.cache.find(guild => guild.id == set.guild_id);
-        var user = await guild.members.fetch(discordOauth.id);
+        console.log((await (await discordProxy("users/@me", `Bearer ${req.headers.discord_token}`).data)).id);
+        var user = await guild.members.fetch(
+            (await (await discordProxy("users/@me", `Bearer ${req.headers.discord_token}`).data)).id
+        );
         res.send("請至您的discord帳號中查看!!");
         let _msg = await user.send("點擊下方 ✅ 確認是否為您申請身份!!\n若非您請求，請掠過本訊息");
         await _msg.react("✅");
