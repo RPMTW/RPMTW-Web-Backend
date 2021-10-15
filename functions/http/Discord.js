@@ -25,6 +25,15 @@ const getDiscordToken = async (code) => await fetch(`${sets.discord.API}/oauth2/
     })
 })
 
+const getDiscordOauth2User = async (token) => await axios({
+  url: "https://discord.com/api/v9/oauth2/@me",
+  method: "GET",
+  headers: {
+    "Content-Type": "application/json",
+    Authorization: token,
+  }
+})
+
 module.exports = {
     getDiscordToken,
 }

@@ -7,7 +7,7 @@ const {
 const {
     discord
 } = require("./data")
-
+const client = require("./client")
 
 const app = express();
 
@@ -21,6 +21,7 @@ app
 
 server.listen(process.env.PORT || 5000, () => {
     console.log("is ready")
+    client.login(process.env.discord_bot_token);
 })
 
 console.log(discord.Oauth2)

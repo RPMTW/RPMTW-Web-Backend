@@ -13,8 +13,20 @@
   "dependencies": {
     "axios": "^0.22.0",
     "cors": "^2.8.5",
+    "discord.js": "^12.5.0",
     "express": "^4.17.1",
     "node-fetch": "^2.6.0",
     "querystring": "^0.2.1"
-  }
+  },
+  "devDependencies": {
+    "node": "^16.6.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RPMTW/RPMTW-Web-Backend.git"
+  },
+  "bugs": {
+    "url": "https://github.com/RPMTW/RPMTW-Web-Backend/issues"
+  },
+  "homepage": "https://github.com/RPMTW/RPMTW-Web-Backend#readme"
 }
