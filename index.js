@@ -1,7 +1,6 @@
 require("dotenv").config()
 const express = require("express");
 const cors = require("cors");
-const ping = require("express-ping");
 
 const router = require("./router");
 const {
@@ -18,7 +17,10 @@ const server = Server(app);
 
 app
     .use(cors())
-    .use(ping.ping())
+    .use(express.json())
+    .use(require('body-parser').urlencoded({
+        extended: false
+    }))
     .set("view engine", "html")
     .get("/", (req, res) => res.send("此為 RPMTW 後端 API 非工作人員請勿訪問 www"))
     .use(router)
