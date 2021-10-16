@@ -9,9 +9,14 @@ const {
     BadRequestError
 } = require("../../errors/httpError")
 
+setInterval(() => {
+
+}, 1e3 * 60)
+
 router
     .get("/", async (req, res) => {
-        let post = await axios({
+        let send_time = new Date();
+        let data = await (await axios({
             url: `${url.format({
                 protocol: req.protocol,
                 host: req.get("host"),
@@ -19,23 +24,22 @@ router
             })}/check`,
             method: "POST",
             data: {
-                send_time: new Date(),
+                send_time,
             },
             headers: {
-                "Accept": "application/json, text/plain, */*"
-            }
-        })
-        let data = await post.data
+                "Accept": "application/json, text/plain, */*",
+            },
+        })).data;
+        let ping = (~~((new Date(data.back_time) - send_time) / 2) || "<=0") + "ms"
         res.json({
-            ping: new Date(data.back_time) - new Date(data.client_send_time)
-        })
+            ping
+        });
     })
     .post("/check", (req, res) => {
         if (["send_time"].filter(value => !(value in req.body)).length > 0)
             return res.status(400).json(BadRequestError())
         res.json({
             back_time: new Date(),
-            client_send_time: new Date(req.body.send_time),
         })
     })
 
