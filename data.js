@@ -16,7 +16,7 @@ let discord = {
     botId: "880821114014666753",
     API: "https://discord.com/api",
     client_secret: process.env.discord_client_secret,
-    REDIRECT_URI: `${web.api}/discord/oauth/auth/maim`,
+    REDIRECT_URI: `${web.api}/discord/oauth/auth/main`,
 }
 let crowdin = {
     /* crowdin */
