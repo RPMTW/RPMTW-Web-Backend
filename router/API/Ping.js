@@ -9,10 +9,6 @@ const {
     BadRequestError
 } = require("../../errors/httpError")
 
-setInterval(() => {
-
-}, 1e3 * 60)
-
 router
     .get("/", async (req, res) => {
         let send_time = new Date();
@@ -30,14 +26,13 @@ router
                 "Accept": "application/json, text/plain, */*",
             },
         })).data;
-        let ping = (~~((new Date(data.back_time) - send_time) / 2) || "<=0") + "ms"
         res.json({
-            ping
+            ping: (~~((new Date(data.back_time) - send_time) / 2) || "<=0") + "ms"
         });
     })
     .post("/check", (req, res) => {
-        if (["send_time"].filter(value => !(value in req.body)).length > 0)
-            return res.status(400).json(BadRequestError())
+        // if (["send_time"].filter(value => !(value in req.body)).length > 0)
+        // return res.status(400).json(BadRequestError())
         res.json({
             back_time: new Date(),
         })

@@ -15,7 +15,8 @@ const {
     proxy: crowdinProxy,
 } = require('../../functions/http/Crowdin')
 const {
-    discord
+    discord,
+    web
 } = require("../../data")
 
 let set = {
@@ -29,7 +30,7 @@ router
     .get("/oauth/auth", (req, res) => {
         /* 回傳 discord token */
         if (!req.query.code) return res.status(400).json(BadRequestError())
-        getDiscordToken(req.query.code)
+        getDiscordToken(req.query.code, `${web.api}/discord/oauth/auth`)
             .then(data => data.json())
             .then(json => res.json(json))
             .catch(error => res.status((error.response && error.response.status) || 500).json({
@@ -37,9 +38,15 @@ router
                 name: error.name,
             }))
     })
-    .get("/oauth/crowin/gotome", (req, res) => {
-        `${discord.Oauth2}state=${req.query.code}`
-
+    .get("/oauth/auth/maim", (req, res) => {
+        if (!req.query.code) return res.status(400).json(BadRequestError())
+        getDiscordToken(req.query.code)
+            .then(data => data.json())
+            .then(json => res.redirect(301, `${web.main}/discord/callback?token=${json.access_token}`))
+            .catch(error => res.status((error.response && error.response.status) || 500).json({
+                message: error.message,
+                name: error.name,
+            }))
     })
     .post("/oauth/checkCrowin", async (req, res) => {
         if (!(req.headers.discord_token && req.headers.crowdin_token)) res.status(400).json(BadRequestError());
@@ -48,7 +55,7 @@ router
         try {
             try {
                 (await (await discordProxy("users/@me/guilds", `Bearer ${req.headers.discord_token}`)).data)
-                .filter(guild => guild.id == set.guild_id).length > 0 || in_guild_error.push("DC")
+                    .filter(guild => guild.id == set.guild_id).length > 0 || in_guild_error.push("DC")
             } catch {
                 throw {
                     error: "discord Oauth2 認證錯誤!!!",
@@ -56,7 +63,7 @@ router
             }
             try {
                 (await (await crowdinProxy("projects", `Bearer ${req.headers.crowdin_token}`)).data)
-                .data.filter(project => project.data.id == set.crowdinId).length > 0 || in_guild_error.push("crowdin")
+                    .data.filter(project => project.data.id == set.crowdinId).length > 0 || in_guild_error.push("crowdin")
             } catch {
                 throw {
                     error: "crowdin Oauth2 認證錯誤!!!",
@@ -74,7 +81,7 @@ router
         );
         let _msg = await user.send("點擊下方 ✅ 確認是否為您申請身份!!\n若非您請求，請掠過本訊息");
         await _msg.react("✅");
-        res.send("請至您的discord帳號中查看!!");
+        res.send("請至您的 discord 帳號中查看!!");
         let callback = async react => {
             if (react.message_id == _msg.id && react.user_id != client.user.id && "✅" == react.emoji.name) {
                 let guild = await client.guilds.fetch(set.guild_id);

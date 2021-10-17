@@ -17,7 +17,7 @@ const proxy = async (url, Authorization) => await axios({
 })
 
 /** get Oauth2 Token */
-const getDiscordToken = async (code) => await fetch(`${sets.discord.API}/oauth2/token`, {
+const getDiscordToken = async (code, redirect_uri) => await fetch(`${sets.discord.API}/oauth2/token`, {
     method: "POST",
     headers: {
         "Content-Type": "application/x-www-form-urlencoded",
@@ -28,7 +28,7 @@ const getDiscordToken = async (code) => await fetch(`${sets.discord.API}/oauth2/
         client_secret: sets.discord.client_secret,
         grant_type: "authorization_code",
         scope: "identify",
-        redirect_uri: sets.discord.REDIRECT_URI,
+        redirect_uri: redirect_uri || sets.discord.REDIRECT_URI,
         code: code,
     })
 })

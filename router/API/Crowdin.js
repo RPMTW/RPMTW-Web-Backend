@@ -42,9 +42,19 @@ router
     .get("/oauth/auth", (req, res) => {
         /** GET token */
         if (!req.query.code) return res.status(400).json(BadRequestError())
-        getCrowdinToken(req.query.code)
+        getCrowdinToken(req.query.code, "/crowdin/oauth/auth")
             .then(data => data.data)
             .then(json => res.json(json))
+            .catch(error => res.status(error.response && error.response.status || 500).json({
+                message: error.message,
+                name: error.name
+            }))
+    })
+    .get("/oauth/auth/main", async (req, res) => {
+        if (!req.query.code) return res.status(400).json(BadRequestError())
+        getCrowdinToken(req.query.code)
+            .then(data => data.data)
+            .then(json => res.redirect(301, `${sets.web.main}/crowdin/callback?token=${json.access_token}`))
             .catch(error => res.status(error.response && error.response.status || 500).json({
                 message: error.message,
                 name: error.name
