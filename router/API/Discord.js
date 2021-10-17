@@ -42,7 +42,7 @@ router
         if (!req.query.code) return res.status(400).json(BadRequestError())
         getDiscordToken(req.query.code)
             .then(data => data.json())
-            .then(json => res.redirect(301, `${web.main}/discord/callback?token=${json.access_token}&type=discord`))
+            .then(json => res.redirect(301, `${web.main}/callback?token=${json.access_token}&type=discord`))
             .catch(error => res.status((error.response && error.response.status) || 500).json({
                 message: error.message,
                 name: error.name,

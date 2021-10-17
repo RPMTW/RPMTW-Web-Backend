@@ -54,7 +54,7 @@ router
         if (!req.query.code) return res.status(400).json(BadRequestError())
         getCrowdinToken(req.query.code)
             .then(data => data.data)
-            .then(json => res.redirect(301, `${sets.web.main}/crowdin/callback?token=${json.access_token}`))
+            .then(json => res.redirect(301, `${sets.web.main}/callback?token=${json.access_token}`))
             .catch(error => res.status(error.response && error.response.status || 500).json({
                 message: error.message,
                 name: error.name
