@@ -38,7 +38,7 @@ router
                 name: error.name,
             }))
     })
-    .get("/oauth/auth/maim", (req, res) => {
+    .get("/oauth/auth/main", (req, res) => {
         if (!req.query.code) return res.status(400).json(BadRequestError())
         getDiscordToken(req.query.code)
             .then(data => data.json())
