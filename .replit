@@ -1,1 +1,1 @@
-run="node ./bin/www"
+run="npx node ./bin/www.js"

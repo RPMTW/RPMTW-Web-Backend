@@ -20,9 +20,9 @@ const {
 } = require("../../data")
 
 let set = {
-    guild_id: "808241076657717268", // testing
-    role_id: "808243313072537670", // testing
-    crowdinId: "442446", // testing
+    guild_id: "808241076657717268", // DC伺服ID
+    role_id: "808243313072537670", // 加入的身分
+    crowdinId: "442446", // crowdin Id
 }
 
 router
