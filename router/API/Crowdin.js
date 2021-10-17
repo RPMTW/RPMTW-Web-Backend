@@ -33,7 +33,7 @@ router
         if (!req.query.code) return res.status(400).json(BadRequestError())
         getCrowdinToken(req.query.code, "https://rear-end.a102009102009.repl.co/crowdin/oauth/auth/web")
             .then(data => data.data)
-            .then(json => res.redirect(301, `${sets.web.translator}/callback.html?data=${JSON.stringify(json)}`))
+            .then(json => res.redirect(301, `${sets.web.translator}/callback.html?data=${JSON.stringify(json)}&type=crowdin`))
             .catch(error => res.status(error.response && error.response.status || 500).json({
                 message: error.message,
                 name: error.name
