@@ -20,8 +20,8 @@ const {
 } = require("../../data")
 
 let set = {
-    guild_id: "808241076657717268", // DC伺服ID
-    role_id: "808243313072537670", // 加入的身分
+    guild_id: "815819580840607807", // DC伺服ID
+    role_id: "825728890860732466", // 加入的身分
     crowdinId: "442446", // crowdin Id
 }
 

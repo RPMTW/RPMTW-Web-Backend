@@ -10,5 +10,5 @@ const server = http.createServer(app);
 
 server.listen(port, () => {
     console.log("is ready")
-    client.login(process.env.discord_bot_token);
+    // client.login(process.env.discord_bot_token);
 });
