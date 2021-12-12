@@ -7,8 +7,8 @@ let web = {
     /* 網頁/官方API */
     api: "https://rear-end.a102009102009.repl.co",
     rpmtwchat: "https://api.rpmtwchat.ga",
-    main: "https://www.rpmtw.ga",
-    translator: "https://translator.rpmtw.ga"
+    main: "https://www.rpmtw.com",
+    translator: "https://translator.rpmtw.com"
 }
 let discord = {
     /* discord 相關 */

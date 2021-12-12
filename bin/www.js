@@ -5,10 +5,11 @@ const client = require("../client")
 
 const port = process.env.PORT || "5000"
 app.set("port", port)
+app.set("dcBot", client)
 
 const server = http.createServer(app);
 
 server.listen(port, () => {
-    console.log("is ready")
-    // client.login(process.env.discord_bot_token);
+    console.log("is ready");
+    client.login(process.env.discord_bot_token);
 });

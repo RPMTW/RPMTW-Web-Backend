@@ -10,7 +10,6 @@ const {
 const {
     BadRequestError
 } = require('../../errors/httpError')
-const client = require("../../client")
 const {
     proxy: crowdinProxy,
 } = require('../../functions/http/Crowdin')
@@ -49,6 +48,7 @@ router
             }))
     })
     .post("/oauth/checkCrowin", async (req, res) => {
+		const client = req.app.get("dcBot")
         if (!(req.headers.discord_token && req.headers.crowdin_token)) res.status(400).json(BadRequestError());
         /* --------------- */
         let in_guild_error = []
@@ -76,6 +76,8 @@ router
             return res.status(401).json(BadRequestError(`你不在我們的 ${in_guild_error.join("、")} 中`, 401));
         /* --------------- */
         let guild = client.guilds.cache.find(guild => guild.id == set.guild_id);
+		if (!guild) return res.status(500)
+			.send(`機器人不在RPMTW DC 中，請向管理員報告`);
         var user = await guild.members.fetch(
             (await (await discordProxy("users/@me", `Bearer ${req.headers.discord_token}`)).data).id
         );
@@ -85,9 +87,15 @@ router
         let callback = async react => {
             if (react.message_id == _msg.id && react.user_id != client.user.id && "✅" == react.emoji.name) {
                 let guild = await client.guilds.fetch(set.guild_id);
-                await (await guild.members.fetch(react.user_id)).roles.add(await guild.roles.fetch(set.role_id));
-                await _msg.delete();
-                await user.send("添加完成");
+				try {
+					await (await guild.members.fetch(react.user_id)).roles.add(await guild.roles.fetch(set.role_id));
+				} catch (e) {
+					await user.send("error!!", e)
+				} finally {
+					await _msg.delete();
+                	_msg = await user.send("添加完成");
+					setTimeout(() => _msg.delete(), 5e3)
+				}
                 clearTimeout(setTime);
             }
         }
